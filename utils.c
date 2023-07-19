@@ -29,11 +29,15 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-int is_digit(int c)
+int is_digit(char *s)
 {
-    if(c >= '0' && c <= '9')
-        return (1);
-    return (0);
+	while(*s)
+	{
+		if(!(*s >= '0' && *s <= '9'))
+			return (0);
+		s++;
+	}
+    return (1);
 }
 
 int ft_atoi(char *s)
@@ -45,11 +49,6 @@ int ft_atoi(char *s)
 	res = 0;
 	while ((s[i] == ' ') || (s[i] >= 9 && s[i] <= 13))
 		i++;
-	if (s[i] == '-')
-	{
-       	ft_putstr_fd("Error : negative input\n", 2);
-        return (1);
-	}
 	if (s[i] == '0')
 	{
 		while(s[i] == '0')
@@ -63,11 +62,11 @@ int ft_atoi(char *s)
 	return (res);
 }
 
-void inits(t_list *data)
+void inits(t_list data)
 {
-	data->num_of_meals = 0;
-	data->num_philo = 0;
-	data->time_to_die = 0;
-	data->time_to_eat = 0;
-	data->time_to_sleep = 0;
+	data.num_of_meals = 0;
+	data.num_philo = 0;
+	data.time_to_die = 0;
+	data.time_to_eat = 0;
+	data.time_to_sleep = 0;
 }

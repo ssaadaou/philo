@@ -11,30 +11,51 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-//check on only digits
 
-//input must not be negative------> if (atoi(av[?]) < 0 (quitee) +++)
-
-void valid_input(int ac, char **av)
+int args_as_digit(int ac, char **av)
 {
-    t_list *args;
-    
+	int i = 1;
+
+	while (i < ac) 
+    {
+		if (!is_digit(av[i])) 
+        {
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+int valid_input(int ac, char **av , t_list args)
+{
     if(ac != 5 && ac != 6)
     {
-        ft_putstr_fd("Error : incorrect number of arguments\n", 2);
-        return ;
+        printf("Error: incorrect number of arguments\n");
+        return 1;
     }
-    args = malloc(sizeof(t_list));
-    inits(args);
-    args->num_philo = ft_atoi(av[1]);
-    args->time_to_die = ft_atoi(av[2]);
-    args->time_to_eat = ft_atoi(av[3]); 
-    args->time_to_sleep = ft_atoi(av[4]);
+    if(!args_as_digit(ac, av))
+    {
+        printf("Error: arguments must be digits and positive\n");
+        return 1;
+    }
+    inits(&args);
+    args.num_philo = ft_atoi(av[1]);
+    args.time_to_die = ft_atoi(av[2]);
+    args.time_to_eat = ft_atoi(av[3]); 
+    args.time_to_sleep = ft_atoi(av[4]);
     if(av[5])
-        args->num_of_meals = ft_atoi(av[5]);
+        args.num_of_meals = ft_atoi(av[5]);
 }
 
 int main(int ac, char **av)
 {
-    valid_input(ac, av);
+    t_list args;
+    if(valid_input(ac, av, args))
+        return 1; 
+    int i = 0;
+    while(i < args.num_philo)
+    {
+        
+    }
 }

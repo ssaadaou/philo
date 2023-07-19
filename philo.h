@@ -27,10 +27,15 @@ typedef struct s_list
     
 }t_list;
 
+typedef struct s_philo
+{
+    
+}t_philo;
 //parsing
+
 int ft_atoi(char *s);
-int is_digit(int c);
+int is_digit(char *s);
 void	ft_putstr_fd(char *s, int fd);
-void inits(t_list *data);
+void inits(t_list data);
 
 #endif
