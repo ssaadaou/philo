@@ -6,7 +6,7 @@
 /*   By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 19:28:30 by ssaadaou          #+#    #+#             */
-/*   Updated: 2023/07/07 22:33:27 by ssaadaou         ###   ########.fr       */
+/*   Updated: 2023/07/20 04:52:59 by ssaadaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ typedef struct s_philo
 int ft_atoi(char *s);
 int is_digit(char *s);
 void	ft_putstr_fd(char *s, int fd);
-void inits(t_list data);
+void inits(t_list *data);
 
 #endif

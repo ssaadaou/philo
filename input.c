@@ -6,7 +6,7 @@
 /*   By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:53:15 by ssaadaou          #+#    #+#             */
-/*   Updated: 2023/07/07 22:35:37 by ssaadaou         ###   ########.fr       */
+/*   Updated: 2023/07/20 04:58:42 by ssaadaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int args_as_digit(int ac, char **av)
 	return (1);
 }
 
-int valid_input(int ac, char **av , t_list args)
+int valid_input(int ac, char **av , t_list *args)
 {
     if(ac != 5 && ac != 6)
     {
@@ -39,23 +39,25 @@ int valid_input(int ac, char **av , t_list args)
         printf("Error: arguments must be digits and positive\n");
         return 1;
     }
-    inits(&args);
-    args.num_philo = ft_atoi(av[1]);
-    args.time_to_die = ft_atoi(av[2]);
-    args.time_to_eat = ft_atoi(av[3]); 
-    args.time_to_sleep = ft_atoi(av[4]);
+    inits(args);
+    args->num_philo = ft_atoi(av[1]);
+    args->time_to_die = ft_atoi(av[2]);
+    args->time_to_eat = ft_atoi(av[3]); 
+    args->time_to_sleep = ft_atoi(av[4]);
     if(av[5])
-        args.num_of_meals = ft_atoi(av[5]);
+        args->num_of_meals = ft_atoi(av[5]);
+    return(0);
 }
 
 int main(int ac, char **av)
 {
     t_list args;
-    if(valid_input(ac, av, args))
+    if(valid_input(ac, av, &args))
         return 1; 
-    int i = 0;
-    while(i < args.num_philo)
-    {
+    // int i = 0;
+    printf("philo number total = %d\n", args.num_philo);
+    // while(i < args.num_philo)
+    // {
         
-    }
+    // }
 }
