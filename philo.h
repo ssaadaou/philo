@@ -6,7 +6,7 @@
 /*   By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 19:28:30 by ssaadaou          #+#    #+#             */
-/*   Updated: 2023/08/14 16:23:15 by ssaadaou         ###   ########.fr       */
+/*   Updated: 2023/08/18 22:12:03 by ssaadaou         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -34,6 +34,7 @@ typedef struct s_list
     int time_to_eat;
     int time_to_sleep;
     int num_of_meals;
+    int count_meals;
     pthread_mutex_t printf_;
     pthread_mutex_t *fork;
     t_philo *ph;
