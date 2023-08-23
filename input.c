@@ -6,7 +6,7 @@
 /*   By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:53:15 by ssaadaou          #+#    #+#             */
-/*   Updated: 2023/08/18 22:12:56 by ssaadaou         ###   ########.fr       */
+/*   Updated: 2023/08/18 22:37:27 by ssaadaou         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -57,6 +57,7 @@ long long time_()
     now = time_var.tv_sec * 1000 + time_var.tv_usec / 1000;
     return(now);
 }
+
 void take_forks(t_philo *philo)
 {
     pthread_mutex_lock(&philo->data->fork[philo->id - 1]);
@@ -64,6 +65,7 @@ void take_forks(t_philo *philo)
     printf("philo %d right fork\n", philo->id);
     pthread_mutex_unlock(&philo->data->printf_);
     pthread_mutex_lock(&philo->data->fork[philo->id % philo->data->num_philo]);
+    printf("ID .......... %d\n", philo->id);
     pthread_mutex_lock(&philo->data->printf_);
     printf("philo %d left fork\n", philo->id);
     pthread_mutex_unlock(&philo->data->printf_);  
@@ -72,11 +74,13 @@ void take_forks(t_philo *philo)
 void dinner_time(t_philo *philo)
 {
     pthread_mutex_lock(&philo->data->printf_);
-    printf("philo %d is eatiiiiiiiiiiiiiiinnnnnnng\n", philo->id);
+    printf("philo %d is eatiiiiiiiigggggggg\n", philo->id);
     pthread_mutex_unlock(&philo->data->printf_);
+    philo->count_meals++;
+    printf("count meals for each ph = %d\n", philo->count_meals);
+    if(philo->count_meals == philo->data->num_of_meals)
+        return ;
     usleep(philo->data->time_to_eat * 1000);
-    philo->data->count_meals++;
-    printf("num of meals ------------%d\n", philo->data->count_meals);
     pthread_mutex_unlock(&philo->data->fork[philo->id - 1]);
     pthread_mutex_unlock(&philo->data->fork[philo->id % philo->data->num_philo]);
 }
@@ -84,8 +88,9 @@ void dinner_time(t_philo *philo)
 void thinking(t_philo *philo)
 {
     pthread_mutex_lock(&philo->data->printf_);    
-    printf("philo %d is thinkiiiiiiiiinnnnnnnnnnnnnnnnnnnnng\n", philo->id);
+    printf("philo %d is thinkiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnng\n", philo->id);
     pthread_mutex_unlock(&philo->data->printf_);
+    usleep(philo->data->time_to_sleep);
 }
 void *routine(void *ph)
 {
@@ -95,23 +100,12 @@ void *routine(void *ph)
     while(1)
     {
         take_forks(philo);
-        printf("ID .......... %d\n", philo->id);
         dinner_time(philo);
         thinking(philo);
     }
-    return NULL; 
+    return NULL;
 }
 
-void init_fork(t_list *data)
-{
-    int i = 0;
-    while(i < data->num_philo)
-    {
-        pthread_mutex_init(&data->fork[i], NULL);
-        data->ph[i].data = data;
-        i++;
-    }
-}
 void init_philo(t_list *data)
 {
     int i = 0; 
@@ -127,6 +121,17 @@ void init_philo(t_list *data)
            i = 1;
     }
 }
+void init_fork(t_list *data)
+{
+    int i = 0;
+    while(i < data->num_philo)
+    {
+        pthread_mutex_init(&data->fork[i], NULL);
+        data->ph[i].data = data;
+        i++;
+    }
+}
+
 int main(int ac, char **av)
 {
     t_list args;

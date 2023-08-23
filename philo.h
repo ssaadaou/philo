@@ -21,6 +21,7 @@
 typedef struct s_philo
 {
     int id;
+    int count_meals;
     pthread_t philo;
     long long last_meal;
     struct s_list *data;
@@ -34,14 +35,10 @@ typedef struct s_list
     int time_to_eat;
     int time_to_sleep;
     int num_of_meals;
-    int count_meals;
     pthread_mutex_t printf_;
     pthread_mutex_t *fork;
     t_philo *ph;
-    
-
 }t_list;
-
 
 //parsing
 
