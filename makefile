@@ -3,11 +3,11 @@ HEADER = philo.h
 
 CC = cc
 
-# CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -fsanitize=thread
 
 RM = rm -rf
 
-SRC = utils.c input.c
+SRC = utils.c input.c death_note.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
