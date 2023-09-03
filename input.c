@@ -60,9 +60,9 @@ long long time_(void)
 void usleep_(long long chrono)
 {
     long long now;
-    while(now < now + chrono);
-    {
         now = time_();
+    while(time_() < (now + chrono));
+    {
         usleep(400);
     }
 }
@@ -72,10 +72,10 @@ void dinner_time(t_philo *philo)
 {
     pthread_mutex_lock(&philo->data->printf_);
     printf("philo %d is eatiiiiiiiigggggggg\n", philo->id);
-    pthread_mutex_unlock(&philo->data->printf_);
-    pthread_mutex_lock(&philo->data->meals_count);
     philo->count_meals++;
-    pthread_mutex_unlock(&philo->data->meals_count);
+    pthread_mutex_unlock(&philo->data->printf_);
+    // pthread_mutex_lock(&philo->data->meals_count);
+    // pthread_mutex_unlock(&philo->data->meals_count);
     if(philo->count_meals == philo->data->num_of_meals)
         return ;
     usleep_(philo->data->time_to_eat * 1000);
@@ -100,10 +100,20 @@ void thinking(t_philo *philo)
 
 void take_forks(t_philo *philo)
 {
-    if((philo->id % philo->data->num_philo) == philo->data->num_philo - 1)
-    {
-        printf(">> %d <<\n", philo->id);
-    	philo->id = 1;
+    // if((philo->id % philo->data->num_philo) == philo->data->num_philo - 1)
+    // {
+    //     printf(">> %d <<\n", philo->id);
+    // 	philo->id = 1;
+    // }
+      int right_fork_index = philo->id - 1;
+    int left_fork_index = philo->id % philo->data->num_philo;
+    printf("Debug: id=%d, num_philo=%d, right_fork_index=%d, left_fork_index=%d\n",
+       philo->id, philo->data->num_philo, right_fork_index, left_fork_index);
+
+    if (right_fork_index < 0 || right_fork_index >= philo->data->num_philo ||
+        left_fork_index < 0 || left_fork_index >= philo->data->num_philo) {
+        printf("Index out of bounds.\n");
+        exit(1);
     }
     pthread_mutex_lock(&philo->data->fork[philo->id - 1]);
     pthread_mutex_lock(&philo->data->printf_);
@@ -113,7 +123,7 @@ void take_forks(t_philo *philo)
     pthread_mutex_lock(&philo->data->printf_);
     printf("philo %d left fork\n", philo->id);
     pthread_mutex_unlock(&philo->data->printf_); 
-    dinner_time(philo); 
+    // dinner_time(philo); 
     pthread_mutex_unlock(&philo->data->fork[philo->id - 1]);
     pthread_mutex_unlock(&philo->data->fork[philo->id % philo->data->num_philo]);
 }
@@ -131,7 +141,7 @@ void *routine(void *ph)
         // if(check_death(philo) == -1)
         //     return NULL;
         take_forks(philo);
-        // dinner_time(philo);
+        dinner_time(philo);
         sleep_time(philo);
         thinking(philo);
     }
@@ -172,10 +182,11 @@ int main(int ac, char **av)
 {
     t_list args;
     if(valid_input(ac, av, &args))
-        return 1; 
-    
+        return 1;
     args.fork = malloc(sizeof(pthread_mutex_t) * args.num_philo);
     args.ph = malloc(sizeof(t_philo) * args.num_philo);
     init_fork(&args);
     init_philo(&args);
+    free(args.fork);
+    free(args.ph);
 }
