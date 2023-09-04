@@ -7,7 +7,7 @@ CC = cc
 
 RM = rm -rf
 
-SRC = utils.c input.c death_note.c
+SRC = utils.c input.c routine.c death_note.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
