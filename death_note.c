@@ -7,7 +7,8 @@ int check_death(t_philo *philo)
     {
         if (time_() - philo->last_meal >= philo->data->time_to_die)
         {
-            printf("waiting time : %lld | time_to_die : %d\n", time_() - philo->last_meal,philo->data->time_to_die );
+            // printf("now time : %lld // lastmeal : %lld\n", time_() , philo->last_meal);
+            // printf("waiting time : %lld | time_to_die : %d\n", time_() - philo->last_meal,philo->data->time_to_die );
             pthread_mutex_lock(&philo->data->printf_);
             printf("philo %d died\n", philo->id);
             pthread_mutex_unlock(&philo->data->printf_);
@@ -21,6 +22,7 @@ int check_death(t_philo *philo)
             pthread_mutex_unlock(&philo->data->printf_);
             return (-1);
         }
+        // pthread_mutex_unlock(&philo->data->hold);
 
     }
 }
