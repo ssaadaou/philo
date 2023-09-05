@@ -54,7 +54,7 @@ void	ft_putstr_fd(char *s, int fd);
 void inits(t_list *data);
 int valid_input(int ac, char **av , t_list *args);
 int args_as_digit(int ac, char **av);
-int check_death(t_philo *philo);
+void check_death(t_list *data);
 void init_fork(t_list *data);
 void init_philo(t_list *data);
 void *routine(void *ph);

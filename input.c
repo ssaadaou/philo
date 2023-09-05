@@ -18,7 +18,7 @@ int args_as_digit(int ac, char **av)
 
 	while (i < ac) 
     {
-		if (!is_digit(av[i])) 
+		if (!is_digit(av[i]) ) 
         {
 			return (0);
 		}

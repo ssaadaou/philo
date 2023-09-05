@@ -20,12 +20,12 @@ void init_philo(t_list *data)
     { 
         data->ph[i].meals_eaten = 0;
         data->ph[i].id = i + 1;
-        data->ph[i].last_meal = time_();
 	    pthread_create(&data->ph[i].philo, NULL, &routine, &data->ph[i]);
         pthread_detach(data->ph[i].philo);
         usleep(10);
         i++;
     }
+    // check_death(data);
 }
 
 void init_fork(t_list *data)
@@ -45,12 +45,14 @@ void init_fork(t_list *data)
 int main(int ac, char **av)
 {
     t_list args;
+    pthread_t monitor;
     if(valid_input(ac, av, &args))
         return 1;
     args.fork = malloc(sizeof(pthread_mutex_t) * args.num_philo);
     args.ph = malloc(sizeof(t_philo) * args.num_philo);
     init_fork(&args);
     init_philo(&args);
+    check_death(&args);
     pthread_mutex_lock(&args.hold);
     pthread_mutex_unlock(&args.hold);
     free(args.fork);

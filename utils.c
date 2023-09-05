@@ -31,6 +31,8 @@ void	ft_putstr_fd(char *s, int fd)
 
 int is_digit(char *s)
 {
+	if (*s == '+')
+		s++;
 	while(*s)
 	{
 		if(!(*s >= '0' && *s <= '9'))
