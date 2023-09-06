@@ -6,7 +6,7 @@
 #    By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/06 02:44:46 by ssaadaou          #+#    #+#              #
-#    Updated: 2023/09/06 02:44:47 by ssaadaou         ###   ########.fr        #
+#    Updated: 2023/09/06 21:17:42 by ssaadaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,7 @@ HEADER = philo.h
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror  
-# -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror  -fsanitize=thread
 
 RM = rm -rf
 

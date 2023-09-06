@@ -6,7 +6,7 @@
 /*   By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:53:15 by ssaadaou          #+#    #+#             */
-/*   Updated: 2023/09/06 02:41:17 by ssaadaou         ###   ########.fr       */
+/*   Updated: 2023/09/06 20:48:44 by ssaadaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ long long time_(void)
     struct timeval time_var;
     gettimeofday(&time_var, NULL);
     long long now;
-    now = time_var.tv_sec * 1000 + time_var.tv_usec / 1000;
+    now = (time_var.tv_sec * 1000) + (time_var.tv_usec / 1000);
     return(now);
 }
 
 void usleep_(long long chrono)
 {
     long long now;
-        now = time_();
-    while(time_() < (now + chrono))
+    now = time_();
+    while(time_() - now < chrono)
     {
         usleep(chrono);
     }

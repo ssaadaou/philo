@@ -6,7 +6,7 @@
 /*   By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:20:59 by ssaadaou          #+#    #+#             */
-/*   Updated: 2023/09/06 02:48:32 by ssaadaou         ###   ########.fr       */
+/*   Updated: 2023/09/06 21:11:09 by ssaadaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void init_philo(t_list *data)
         data->ph[i].id = i + 1;
 	    pthread_create(&data->ph[i].philo, NULL, &routine, &data->ph[i]);
         pthread_detach(data->ph[i].philo);
-        usleep(10);
+        usleep(20);
         i++;
     }
 }
@@ -49,7 +49,7 @@ int main(int ac, char **av)
 {
     t_list args;
     // args.flag = 1;
-    atexit(leaks);
+    // atexit(leaks);
     if(valid_input(ac, av, &args))
         return 1;
     args.fork = malloc(sizeof(pthread_mutex_t) * args.num_philo);
@@ -63,5 +63,5 @@ int main(int ac, char **av)
     pthread_mutex_unlock(&args.hold);
     // free(args.fork);
     // free(args.ph);
-    while(1);
+    // while(1);
 }
