@@ -6,7 +6,7 @@
 /*   By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 19:25:46 by ssaadaou          #+#    #+#             */
-/*   Updated: 2023/09/04 17:26:16 by ssaadaou         ###   ########.fr       */
+/*   Updated: 2023/09/06 02:46:52 by ssaadaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,15 @@ int ft_atoi(char *s)
 	return (res);
 }
 
-void inits(t_list *data)
+void inits(t_list *data, int ac)
 {
-	data->num_of_meals = 0;
+	if (ac > 5)
+		data->num_of_meals = 0;
+	else
+		data->num_of_meals = -1;
 	data->num_philo = 0;
 	data->time_to_die = 0;
 	data->time_to_eat = 0;
 	data->time_to_sleep = 0;
+	data->ph->count_meals = 0;
 }

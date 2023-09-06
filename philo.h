@@ -6,7 +6,7 @@
 /*   By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 19:28:30 by ssaadaou          #+#    #+#             */
-/*   Updated: 2023/09/04 15:14:53 by ssaadaou         ###   ########.fr       */
+/*   Updated: 2023/09/06 02:48:43 by ssaadaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ typedef struct s_list
 int ft_atoi(char *s);
 int is_digit(char *s);
 void	ft_putstr_fd(char *s, int fd);
-void inits(t_list *data);
+void inits(t_list *data, int ac);
 int valid_input(int ac, char **av , t_list *args);
 int args_as_digit(int ac, char **av);
-void check_death(t_list *data);
+int check_death(t_list *data, int ac);
 void init_fork(t_list *data);
 void init_philo(t_list *data);
 void *routine(void *ph);

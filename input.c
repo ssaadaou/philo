@@ -6,7 +6,7 @@
 /*   By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:53:15 by ssaadaou          #+#    #+#             */
-/*   Updated: 2023/09/04 17:21:14 by ssaadaou         ###   ########.fr       */
+/*   Updated: 2023/09/06 02:41:17 by ssaadaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ int valid_input(int ac, char **av , t_list *args)
         printf("Error: arguments must be digits and positive\n");
         return 1;
     }
-    inits(args);
+    inits(args, ac);
     args->num_philo = ft_atoi(av[1]);
     args->time_to_die = ft_atoi(av[2]);
     args->time_to_eat = ft_atoi(av[3]); 
     args->time_to_sleep = ft_atoi(av[4]);
-    if(av[5])
+    if(ac == 6)
         args->num_of_meals = ft_atoi(av[5]); 
     return(0);
 }
@@ -63,7 +63,7 @@ void usleep_(long long chrono)
         now = time_();
     while(time_() < (now + chrono))
     {
-        usleep(900);
+        usleep(chrono);
     }
 }
 

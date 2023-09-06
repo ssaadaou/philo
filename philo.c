@@ -6,7 +6,7 @@
 /*   By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:20:59 by ssaadaou          #+#    #+#             */
-/*   Updated: 2023/09/04 17:21:28 by ssaadaou         ###   ########.fr       */
+/*   Updated: 2023/09/06 02:48:32 by ssaadaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void init_philo(t_list *data)
     pthread_mutex_lock(&data->hold);
     while(i < data->num_philo)
     { 
-        data->ph[i].meals_eaten = 0;
+        // data->ph[i].meals_eaten = 0;
         data->ph[i].id = i + 1;
 	    pthread_create(&data->ph[i].philo, NULL, &routine, &data->ph[i]);
         pthread_detach(data->ph[i].philo);
@@ -52,7 +52,9 @@ int main(int ac, char **av)
     args.ph = malloc(sizeof(t_philo) * args.num_philo);
     init_fork(&args);
     init_philo(&args);
-    check_death(&args);
+    // check_death(&args);
+    if(check_death(&args, ac) != 0)
+        return 1;
     pthread_mutex_lock(&args.hold);
     pthread_mutex_unlock(&args.hold);
     free(args.fork);
