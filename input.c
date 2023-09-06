@@ -40,6 +40,7 @@ int valid_input(int ac, char **av , t_list *args)
         return 1;
     }
     inits(args, ac);
+    // exit (0);
     args->num_philo = ft_atoi(av[1]);
     args->time_to_die = ft_atoi(av[2]);
     args->time_to_eat = ft_atoi(av[3]); 

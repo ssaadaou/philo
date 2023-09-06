@@ -19,10 +19,13 @@ void dinner_time(t_philo *philo)
     pthread_mutex_lock(&philo->data->printf_);
     printf("philo %d is eatiiiiiiiigggggggg\n", philo->id);
     pthread_mutex_unlock(&philo->data->printf_);
+    pthread_mutex_lock(&philo->data->update_time);
     philo->last_meal = time_();
+    pthread_mutex_unlock(&philo->data->update_time);
     usleep_(philo->data->time_to_eat);
     pthread_mutex_lock(&philo->data->meals_count);
-    philo->count_meals++;
+    if(philo->data->num_of_meals != 0)
+        philo->count_meals++;
     printf("meals_count >>>> %d\n", philo->count_meals);
     pthread_mutex_unlock(&philo->data->meals_count);
     pthread_mutex_unlock(&philo->data->fork[philo->id - 1]);
@@ -48,7 +51,7 @@ void take_forks(t_philo *philo)
 {
     pthread_mutex_lock(&philo->data->fork[philo->id - 1]);
     pthread_mutex_lock(&philo->data->printf_);
-    printf("philo %d right fork\n", philo->id);
+    printf("%lld %d has taken a fork\n", time_() ,philo->id);
     pthread_mutex_unlock(&philo->data->printf_);
     pthread_mutex_lock(&philo->data->fork[philo->id % philo->data->num_philo]);
     pthread_mutex_lock(&philo->data->printf_);

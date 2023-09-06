@@ -4,6 +4,7 @@
 int check_death(t_list *data, int ac)
 {
     int i = 0;
+    // (void) ac;
     while(1)
     {
         usleep_(700);
@@ -17,12 +18,13 @@ int check_death(t_list *data, int ac)
                 // pthread_mutex_unlock(&data->printf_);
                 return 1;
             }
-            // printf("\n \n num of meals : %d , count_meals : %d of philo %d\n",data->num_of_meals ,data->ph->count_meals, data->ph[i].id);
             if (ac == 6 && data->ph->count_meals >= data->num_of_meals)
             {
+            printf("\n \n num of meals : %d , count_meals : %d of philo %d\n",data->num_of_meals ,data->ph->count_meals, data->ph[i].id);
                 pthread_mutex_lock(&data->printf_);
                 printf("philo %d has eaten %d times\n", data->ph[i].id, data->ph[i].count_meals);
                 // pthread_mutex_unlock(&data->printf_);
+                // data->flag = 0;
                 return 1;
             }
             // pthread_mutex_unlock(&data->hold);

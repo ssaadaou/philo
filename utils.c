@@ -66,13 +66,15 @@ int ft_atoi(char *s)
 
 void inits(t_list *data, int ac)
 {
-	if (ac > 5)
+	(void) ac;
+	// if (ac == 6)
 		data->num_of_meals = 0;
-	else
-		data->num_of_meals = -1;
+	// else
+		// data->num_of_meals = -1;
 	data->num_philo = 0;
 	data->time_to_die = 0;
 	data->time_to_eat = 0;
 	data->time_to_sleep = 0;
-	data->ph->count_meals = 0;
+	// exit (0);
+	// data->ph->count_meals = 0;
 }

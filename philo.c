@@ -17,15 +17,13 @@ void init_philo(t_list *data)
     int i = 0; 
     pthread_mutex_lock(&data->hold);
     while(i < data->num_philo)
-    { 
-        // data->ph[i].meals_eaten = 0;
+    {
         data->ph[i].id = i + 1;
 	    pthread_create(&data->ph[i].philo, NULL, &routine, &data->ph[i]);
         pthread_detach(data->ph[i].philo);
         usleep(10);
         i++;
     }
-    // check_death(data);
 }
 
 void init_fork(t_list *data)
@@ -34,6 +32,7 @@ void init_fork(t_list *data)
     pthread_mutex_init(&data->printf_, NULL);
     pthread_mutex_init(&data->hold, NULL);
 	pthread_mutex_init(&data->meals_count, NULL);
+    pthread_mutex_init(&data->update_time, NULL);
     while(i < data->num_philo)
     {
         pthread_mutex_init(&data->fork[i], NULL);
@@ -42,10 +41,15 @@ void init_fork(t_list *data)
     }
 }
 
+void leaks()
+{
+    system("leaks philo");
+}
 int main(int ac, char **av)
 {
     t_list args;
-    pthread_t monitor;
+    // args.flag = 1;
+    atexit(leaks);
     if(valid_input(ac, av, &args))
         return 1;
     args.fork = malloc(sizeof(pthread_mutex_t) * args.num_philo);
@@ -57,6 +61,7 @@ int main(int ac, char **av)
         return 1;
     pthread_mutex_lock(&args.hold);
     pthread_mutex_unlock(&args.hold);
-    free(args.fork);
-    free(args.ph);
+    // free(args.fork);
+    // free(args.ph);
+    while(1);
 }

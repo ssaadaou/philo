@@ -39,8 +39,10 @@ typedef struct s_list
     int time_to_eat;
     int time_to_sleep;
     int num_of_meals;
+    int flag;
     pthread_mutex_t meals_count;
     pthread_mutex_t routine_finished_mutex;
+    pthread_mutex_t update_time;
     pthread_mutex_t printf_;
     pthread_mutex_t *fork;
     t_philo *ph;
