@@ -7,14 +7,14 @@ int check_death(t_list *data, int ac)
     // (void) ac;
     while(1)
     {
-        usleep_(700);
+        usleep_(600);
         while(i < data->num_philo)
         {
-            // printf("waiting time : %lld | time_to_die : %d\n", time_() - data->ph[i].last_meal,data->time_to_die );
             if (time_() - data->ph[i].last_meal >= data->time_to_die)
             {
+                printf("waiting time : %lld | time_to_die : %d\n", time_() - data->ph[i].last_meal,data->time_to_die );
                 pthread_mutex_lock(&data->printf_);
-                printf("philo %d died\n", data->ph[i].id);
+                printf("%lld %d died\n", (time_() - data->start_time), data->ph[i].id);
                 // pthread_mutex_unlock(&data->printf_);
                 return 1;
             }
@@ -24,7 +24,6 @@ int check_death(t_list *data, int ac)
                 pthread_mutex_lock(&data->printf_);
                 printf("philo %d has eaten %d times\n", data->ph[i].id, data->ph[i].count_meals);
                 // pthread_mutex_unlock(&data->printf_);
-                // data->flag = 0;
                 return 1;
             }
             // pthread_mutex_unlock(&data->hold);

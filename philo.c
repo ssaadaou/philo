@@ -48,20 +48,18 @@ void leaks()
 int main(int ac, char **av)
 {
     t_list args;
-    // args.flag = 1;
     // atexit(leaks);
     if(valid_input(ac, av, &args))
         return 1;
     args.fork = malloc(sizeof(pthread_mutex_t) * args.num_philo);
     args.ph = malloc(sizeof(t_philo) * args.num_philo);
+    args.start_time = time_();
     init_fork(&args);
     init_philo(&args);
-    // check_death(&args);
     if(check_death(&args, ac) != 0)
         return 1;
     pthread_mutex_lock(&args.hold);
     pthread_mutex_unlock(&args.hold);
     // free(args.fork);
     // free(args.ph);
-    // while(1);
 }

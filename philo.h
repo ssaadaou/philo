@@ -24,24 +24,20 @@ typedef struct s_philo
     int count_meals;
     pthread_t philo;
     long long last_meal;
-    int meals_eaten;
-    pthread_mutex_t *next_fork;
-    pthread_mutex_t routine_finished_mutex;
     struct s_list *data;
 
 }   t_philo;
 
 typedef struct s_list
 {
-    pthread_mutex_t hold;
     int num_philo;
     int time_to_die;
     int time_to_eat;
     int time_to_sleep;
     int num_of_meals;
-    int flag;
+    long long start_time;
+    pthread_mutex_t hold;
     pthread_mutex_t meals_count;
-    pthread_mutex_t routine_finished_mutex;
     pthread_mutex_t update_time;
     pthread_mutex_t printf_;
     pthread_mutex_t *fork;
