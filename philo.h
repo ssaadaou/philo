@@ -6,7 +6,7 @@
 /*   By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 19:28:30 by ssaadaou          #+#    #+#             */
-/*   Updated: 2023/09/06 02:48:43 by ssaadaou         ###   ########.fr       */
+/*   Updated: 2023/09/08 00:44:28 by ssaadaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct s_philo
 {
     int id;
+    int dead;
     int count_meals;
     pthread_t philo;
     long long last_meal;
@@ -36,7 +37,6 @@ typedef struct s_list
     int time_to_sleep;
     int num_of_meals;
     long long start_time;
-    pthread_mutex_t hold;
     pthread_mutex_t meals_count;
     pthread_mutex_t update_time;
     pthread_mutex_t printf_;
