@@ -6,7 +6,7 @@
 /*   By: ssaadaou <ssaadaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:20:59 by ssaadaou          #+#    #+#             */
-/*   Updated: 2023/09/08 00:51:25 by ssaadaou         ###   ########.fr       */
+/*   Updated: 2023/09/08 01:20:03 by ssaadaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_philo(t_list *data)
 		data->ph[i].dead = 0;
 		pthread_create(&data->ph[i].philo, NULL, &routine, &data->ph[i]);
 		pthread_detach(data->ph[i].philo);
-		usleep(10);
+		usleep(30);
 		i++;
 	}
 }
