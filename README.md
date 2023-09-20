@@ -5,8 +5,11 @@ In the Philosophers project, we address a classical synchronization issue known 
 ## Knowledge and Core Principles
 Philosophers and their States
 > Eating: Philosophers require two forks to eat. Ensuring they eat before a set time limit is essential to prevent them from starving to death.
+
 > Sleeping: After eating, philosophers enter a state of rest to simulate real-life behavior.
+
 > Thinking: Philosophers contemplate in this phase, a crucial state before they begin to feel hungry again.
+
 ## Synchronization
 The synchronization of various actions is paramount to prevent deadlocks and ensure a fluid simulation, hinting at deeper concepts in multi-threaded programming.
 
